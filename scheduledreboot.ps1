@@ -16,4 +16,4 @@ try {
     Write-Host -ForegroundColor Red "Task creation failed. Please check the event log for more information."
 }
 
-Read-Host -Prompt "Press Enter to exit"
+
