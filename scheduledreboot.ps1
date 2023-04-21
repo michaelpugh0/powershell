@@ -3,7 +3,7 @@ $rebootTime = Read-Host "Enter reboot time in HH:mm format"
 $ticketNumber = Read-Host "Enter ticket number"
 
 $rebootDateTime = "$rebootDate $rebootTime"
-$taskName = "SysGroup One Time Reboot $ticketNumber"
+$taskName = "SysGroup One Time Reboot | $ticketNumber"
 $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-Command Restart-Computer -Force"
 $trigger = New-ScheduledTaskTrigger -Once -At $rebootDateTime
 
