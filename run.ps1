@@ -10,7 +10,7 @@ $scripts = $files | Where-Object { $_.type -eq "file" -and $_.name.EndsWith(".ps
 # Display the list of available scripts to the user
 Write-Host "`nAvailable scripts:`n"
 for ($i = 0; $i -lt $scripts.Count; $i++) {
-    Write-Host ("{0}. {1}" -f ($i + 1), $scripts[$i].name)
+    Write-Host ("{0}. {1}" -f ($i + 1), $scripts[$i].name.Replace(".ps1", ""))
 }
 
 # Prompt the user to select a script to run
@@ -26,9 +26,8 @@ if ($scriptNumber -eq "007") {
   ______
  /|_||_\`.__
 (   _    _ _\
-=`-(_)--(_)-'  OH NO! a CAT
+=`-(_)--(_)-'  OH NO! A CAT!
 "@
-    
 }
 else {
     # Find the selected script in the list
@@ -37,15 +36,15 @@ else {
     if ($selectedScript) {
         # Construct the raw GitHub URL for the script
         $rawUrl = $selectedScript.download_url
-        $outFile = $selectedScript.name.Split("/")[-1]
+        $outFile = $selectedScript.name.Split("/")[-1].Replace(".ps1", "")
 
         # Download the script from the raw GitHub URL
         Write-Host "`nDownloading script from $rawUrl ..." -ForegroundColor Yellow
-        Invoke-WebRequest -Uri $rawUrl -OutFile $outFile
+        Invoke-WebRequest -Uri $rawUrl -OutFile "$outFile.ps1"
 
         # Execute the script
         Write-Host "`nExecuting script ..." -ForegroundColor Yellow
-        Invoke-Expression ".\$outFile"
+        Invoke-Expression ".\$outFile.ps1"
     }
     else {
         Write-Host "Invalid script number: $scriptNumber" -ForegroundColor Red
