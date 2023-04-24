@@ -1,3 +1,6 @@
+#Created by Michael Pugh, SysGroup PLC. All Rights Reserved.
+#For any bugs or issues, please contact Michael.Pugh@SysGroup.com
+
 # Prompt user for reboot date and time
 $rebootDate = Read-Host -Prompt "Date for reboot (DD/MM/YY)"
 $rebootTime = Read-Host -Prompt "Time for reboot (HH:mm)"
